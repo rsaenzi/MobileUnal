@@ -12,6 +12,12 @@ import java.util.Random;
 
 public class TicTacToeGame {
 
+    // The computer's difficulty levels
+    public enum DifficultyLevel {Easy, Harder, Expert};
+
+    // Current difficulty level
+    private DifficultyLevel mDifficultyLevel = DifficultyLevel.Expert;
+
     private char mBoard[] = {'1','2','3','4','5','6','7','8','9'};
     public static final int BOARD_SIZE = 9;
 
@@ -41,13 +47,17 @@ public class TicTacToeGame {
      * @param player - The HUMAN_PLAYER or COMPUTER_PLAYER
      * @param location - The location (0-8) to place the move
      */
-    public void setMove(char player, int location) {
+    public boolean setMove(char player, int location) {
 
         // If input data is valid...
         if( (location >= 0 && location < BOARD_SIZE) &&
                 (player == HUMAN_PLAYER || player == COMPUTER_PLAYER) ) {
 
             mBoard[location] = player;
+            return true;
+
+        } else {
+            return false;
         }
     }
 
@@ -55,8 +65,49 @@ public class TicTacToeGame {
      * to actually make the computer move to that location.
      * @return The best move for the computer to make (0-8).
      */
-    public int getComputerMove()
-    {
+    public int getComputerMove() {
+
+        int move = -1;
+
+        if (mDifficultyLevel == DifficultyLevel.Easy)
+            move = getRandomMove();
+
+        else if (mDifficultyLevel == DifficultyLevel.Harder) {
+            move = getWinningMove();
+            if (move == -1)
+                move = getRandomMove();
+        }
+        else if (mDifficultyLevel == DifficultyLevel.Expert) {
+
+            // Try to win, but if that's not possible, block.
+            // If that's not possible, move anywhere.
+            move = getWinningMove();
+            if (move == -1)
+                move = getBlockingMove();
+
+            if (move == -1)
+                move = getRandomMove();
+        }
+
+        return move;
+    }
+
+    private int getRandomMove() {
+
+        // Generate random move
+        int move;
+        do {
+            move = mRand.nextInt(BOARD_SIZE);
+
+        } while (mBoard[move] == HUMAN_PLAYER || mBoard[move] == COMPUTER_PLAYER);
+
+        System.out.println("Computer is moving to " + (move + 1));
+
+        mBoard[move] = COMPUTER_PLAYER;
+        return move;
+    }
+
+    private int getWinningMove() {
 
         // First see if there's a move O can make to win
         for (int i = 0; i < BOARD_SIZE; i++) {
@@ -75,6 +126,12 @@ public class TicTacToeGame {
                 }
             }
         }
+
+        // Generate random move
+        return getRandomMove();
+    }
+
+    private int getBlockingMove() {
 
         // See if there's a move O can make to block X from winning
         for (int i = 0; i < BOARD_SIZE; i++) {
@@ -96,16 +153,7 @@ public class TicTacToeGame {
         }
 
         // Generate random move
-        int move;
-        do {
-            move = mRand.nextInt(BOARD_SIZE);
-
-        } while (mBoard[move] == HUMAN_PLAYER || mBoard[move] == COMPUTER_PLAYER);
-
-        System.out.println("Computer is moving to " + (move + 1));
-
-        mBoard[move] = COMPUTER_PLAYER;
-        return move;
+        return getRandomMove();
     }
 
     /**
@@ -164,5 +212,48 @@ public class TicTacToeGame {
 
         // If we make it through the previous loop, all places are taken, so it's a tie
         return 1;
+    }
+
+    private DifficultyLevel getDifficultyLevel() {
+        return mDifficultyLevel;
+    }
+
+    private void setDifficultyLevel(DifficultyLevel difficultyLevel) {
+        mDifficultyLevel = difficultyLevel;
+    }
+
+    public int getDifficultyLevelInt() {
+
+        switch (mDifficultyLevel) {
+            case Easy:
+                return 0;
+
+            case Harder:
+                return 1;
+
+            case Expert:
+                return 2;
+        }
+        return 0;
+    }
+
+    public void setDifficultyLevelInt(int difficultyLevel) {
+        switch (difficultyLevel) {
+            case 0:
+                mDifficultyLevel = DifficultyLevel.Easy;
+                return;
+
+            case 1:
+                mDifficultyLevel = DifficultyLevel.Harder;
+                return;
+
+            case 2:
+                mDifficultyLevel = DifficultyLevel.Expert;
+                return;
+        }
+    }
+
+    public char getBoardOccupant(int i) {
+        return mBoard[i];
     }
 }

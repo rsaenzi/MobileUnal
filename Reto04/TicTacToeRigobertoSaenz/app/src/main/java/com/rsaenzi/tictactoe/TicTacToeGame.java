@@ -50,7 +50,7 @@ public class TicTacToeGame {
     public void setMove(char player, int location) {
 
         // If input data is valid...
-        if( (location > 0 && location < BOARD_SIZE) &&
+        if( (location >= 0 && location < BOARD_SIZE) &&
                 (player == HUMAN_PLAYER || player == COMPUTER_PLAYER) ) {
 
             mBoard[location] = player;
