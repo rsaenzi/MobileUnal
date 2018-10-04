@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AndroidTicTacToeActivity">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:gravity="center_horizontal" >
+
+        <com.rsaenzi.tictactoe.BoardView
+            android:id="@+id/board"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:layout_marginTop="5dp"/>
+
+        <TextView android:id="@+id/information"     android:layout_width="fill_parent"
+            android:layout_height="wrap_content"    android:text="Info"
+            android:gravity="center_horizontal"     android:layout_marginTop="20dp"
+            android:textSize="20dp" />
+
+        <TextView android:id="@+id/humanWins"       android:layout_width="fill_parent"
+            android:layout_height="wrap_content"    android:text="Human: 0"
+            android:gravity="center_horizontal"     android:layout_marginTop="20dp"
+            android:textSize="20dp" />
+
+        <TextView android:id="@+id/computerWins"    android:layout_width="fill_parent"
+            android:layout_height="wrap_content"    android:text="Android: 0"
+            android:gravity="center_horizontal"     android:layout_marginTop="5dp"
+            android:textSize="20dp" />
+
+        <TextView android:id="@+id/ties"            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"    android:text="Ties: 0"
+            android:gravity="center_horizontal"     android:layout_marginTop="5dp"
+            android:textSize="20dp" />
+
+    </LinearLayout>
+
+
+</android.support.constraint.ConstraintLayout>
