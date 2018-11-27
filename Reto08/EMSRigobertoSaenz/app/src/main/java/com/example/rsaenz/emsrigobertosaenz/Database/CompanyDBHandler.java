@@ -6,10 +6,10 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class CompanyDBHandler extends SQLiteOpenHelper{
 
-    private static final String DATABASE_NAME = "employees.db";
+    private static final String DATABASE_NAME = "companies.db";
     private static final int DATABASE_VERSION = 1;
 
-    public static final String TABLE_EMPLOYEES = "employees";
+    public static final String TABLE_COMPANIES = "companies";
     public static final String COLUMN_ID = "empId";
     public static final String COLUMN_FIRST_NAME = "firstname";
     public static final String COLUMN_LAST_NAME = "lastname";
@@ -18,7 +18,7 @@ public class CompanyDBHandler extends SQLiteOpenHelper{
     public static final String COLUMN_DEPT= "dept";
 
     private static final String TABLE_CREATE =
-            "CREATE TABLE " + TABLE_EMPLOYEES + " (" +
+            "CREATE TABLE " + TABLE_COMPANIES + " (" +
                     COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                     COLUMN_FIRST_NAME + " TEXT, " +
                     COLUMN_LAST_NAME + " TEXT, " +
@@ -38,7 +38,7 @@ public class CompanyDBHandler extends SQLiteOpenHelper{
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS "+TABLE_EMPLOYEES);
+        db.execSQL("DROP TABLE IF EXISTS "+ TABLE_COMPANIES);
         db.execSQL(TABLE_CREATE);
     }
 }

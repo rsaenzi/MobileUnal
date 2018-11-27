@@ -6,12 +6,13 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
-import com.example.rsaenz.emsrigobertosaenz.Entity.Employee;
+import com.example.rsaenz.emsrigobertosaenz.Entity.Company;
 import java.util.ArrayList;
 import java.util.List;
 
 public class CompanyOperations {
-    public static final String LOGTAG = "EMP_MNGMNT_SYS";
+
+    public static final String LOGTAG = "COMPANIES_APP";
 
     SQLiteOpenHelper dbhandler;
     SQLiteDatabase database;
@@ -40,69 +41,69 @@ public class CompanyOperations {
         dbhandler.close();
 
     }
-    public Employee addEmployee(Employee Employee){
+    public Company addCompany(Company Company){
         ContentValues values  = new ContentValues();
-        values.put(CompanyDBHandler.COLUMN_FIRST_NAME,Employee.getFirstname());
-        values.put(CompanyDBHandler.COLUMN_LAST_NAME,Employee.getLastname());
-        values.put(CompanyDBHandler.COLUMN_GENDER, Employee.getGender());
-        values.put(CompanyDBHandler.COLUMN_HIRE_DATE, Employee.getHiredate());
-        values.put(CompanyDBHandler.COLUMN_DEPT, Employee.getDept());
-        long insertid = database.insert(CompanyDBHandler.TABLE_EMPLOYEES,null,values);
-        Employee.setEmpId(insertid);
-        return Employee;
+        values.put(CompanyDBHandler.COLUMN_FIRST_NAME, Company.getFirstname());
+        values.put(CompanyDBHandler.COLUMN_LAST_NAME, Company.getLastname());
+        values.put(CompanyDBHandler.COLUMN_GENDER, Company.getGender());
+        values.put(CompanyDBHandler.COLUMN_HIRE_DATE, Company.getHiredate());
+        values.put(CompanyDBHandler.COLUMN_DEPT, Company.getDept());
+        long insertid = database.insert(CompanyDBHandler.TABLE_COMPANIES,null,values);
+        Company.setCompanyId(insertid);
+        return Company;
     }
 
-    // Getting single Employee
-    public Employee getEmployee(long id) {
+    // Getting single Company
+    public Company getCompany(long id) {
 
-        Cursor cursor = database.query(CompanyDBHandler.TABLE_EMPLOYEES,allColumns,CompanyDBHandler.COLUMN_ID + "=?",new String[]{String.valueOf(id)},null,null, null, null);
+        Cursor cursor = database.query(CompanyDBHandler.TABLE_COMPANIES,allColumns,CompanyDBHandler.COLUMN_ID + "=?",new String[]{String.valueOf(id)},null,null, null, null);
         if (cursor != null)
             cursor.moveToFirst();
 
-        Employee e = new Employee(Long.parseLong(cursor.getString(0)),cursor.getString(1),cursor.getString(2),cursor.getString(3),cursor.getString(4),cursor.getString(5));
-        // return Employee
+        Company e = new Company(Long.parseLong(cursor.getString(0)),cursor.getString(1),cursor.getString(2),cursor.getString(3),cursor.getString(4),cursor.getString(5));
+        // return Company
         return e;
     }
 
-    public List<Employee> getAllEmployees() {
+    public List<Company> getAllCompanies() {
 
-        Cursor cursor = database.query(CompanyDBHandler.TABLE_EMPLOYEES,allColumns,null,null,null, null, null);
+        Cursor cursor = database.query(CompanyDBHandler.TABLE_COMPANIES,allColumns,null,null,null, null, null);
 
-        List<Employee> employees = new ArrayList<>();
+        List<Company> companies = new ArrayList<>();
         if(cursor.getCount() > 0){
             while(cursor.moveToNext()){
-                Employee employee = new Employee();
-                employee.setEmpId(cursor.getLong(cursor.getColumnIndex(CompanyDBHandler.COLUMN_ID)));
-                employee.setFirstname(cursor.getString(cursor.getColumnIndex(CompanyDBHandler.COLUMN_FIRST_NAME)));
-                employee.setLastname(cursor.getString(cursor.getColumnIndex(CompanyDBHandler.COLUMN_LAST_NAME)));
-                employee.setGender(cursor.getString(cursor.getColumnIndex(CompanyDBHandler.COLUMN_GENDER)));
-                employee.setHiredate(cursor.getString(cursor.getColumnIndex(CompanyDBHandler.COLUMN_HIRE_DATE)));
-                employee.setDept(cursor.getString(cursor.getColumnIndex(CompanyDBHandler.COLUMN_DEPT)));
-                employees.add(employee);
+                Company company = new Company();
+                company.setCompanyId(cursor.getLong(cursor.getColumnIndex(CompanyDBHandler.COLUMN_ID)));
+                company.setFirstname(cursor.getString(cursor.getColumnIndex(CompanyDBHandler.COLUMN_FIRST_NAME)));
+                company.setLastname(cursor.getString(cursor.getColumnIndex(CompanyDBHandler.COLUMN_LAST_NAME)));
+                company.setGender(cursor.getString(cursor.getColumnIndex(CompanyDBHandler.COLUMN_GENDER)));
+                company.setHiredate(cursor.getString(cursor.getColumnIndex(CompanyDBHandler.COLUMN_HIRE_DATE)));
+                company.setDept(cursor.getString(cursor.getColumnIndex(CompanyDBHandler.COLUMN_DEPT)));
+                companies.add(company);
             }
         }
-        // return All Employees
-        return employees;
+        // return All Companies
+        return companies;
     }
 
-    // Updating Employee
-    public int updateEmployee(Employee employee) {
+    // Updating Company
+    public int updateCompany(Company company) {
 
         ContentValues values = new ContentValues();
-        values.put(CompanyDBHandler.COLUMN_FIRST_NAME, employee.getFirstname());
-        values.put(CompanyDBHandler.COLUMN_LAST_NAME, employee.getLastname());
-        values.put(CompanyDBHandler.COLUMN_GENDER, employee.getGender());
-        values.put(CompanyDBHandler.COLUMN_HIRE_DATE, employee.getHiredate());
-        values.put(CompanyDBHandler.COLUMN_DEPT, employee.getDept());
+        values.put(CompanyDBHandler.COLUMN_FIRST_NAME, company.getFirstname());
+        values.put(CompanyDBHandler.COLUMN_LAST_NAME, company.getLastname());
+        values.put(CompanyDBHandler.COLUMN_GENDER, company.getGender());
+        values.put(CompanyDBHandler.COLUMN_HIRE_DATE, company.getHiredate());
+        values.put(CompanyDBHandler.COLUMN_DEPT, company.getDept());
 
         // updating row
-        return database.update(CompanyDBHandler.TABLE_EMPLOYEES, values,
-                CompanyDBHandler.COLUMN_ID + "=?",new String[] { String.valueOf(employee.getEmpId())});
+        return database.update(CompanyDBHandler.TABLE_COMPANIES, values,
+                CompanyDBHandler.COLUMN_ID + "=?",new String[] { String.valueOf(company.getCompanyId())});
     }
 
-    // Deleting Employee
-    public void removeEmployee(Employee employee) {
+    // Deleting Company
+    public void removeCompany(Company company) {
 
-        database.delete(CompanyDBHandler.TABLE_EMPLOYEES, CompanyDBHandler.COLUMN_ID + "=" + employee.getEmpId(), null);
+        database.delete(CompanyDBHandler.TABLE_COMPANIES, CompanyDBHandler.COLUMN_ID + "=" + company.getCompanyId(), null);
     }
 }

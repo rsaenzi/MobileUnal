@@ -4,24 +4,25 @@ import android.app.ListActivity;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import com.example.rsaenz.emsrigobertosaenz.Database.CompanyOperations;
-import com.example.rsaenz.emsrigobertosaenz.Entity.Employee;
+import com.example.rsaenz.emsrigobertosaenz.Entity.Company;
+
 import java.util.List;
 
 public class ViewAllCompanies extends ListActivity{
 
-    private CompanyOperations employeeOps;
-    List<Employee> employees;
+    private CompanyOperations companyOps;
+    List<Company> companies;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_view_all_employees);
-        employeeOps = new CompanyOperations(this);
-        employeeOps.open();
-        employees = employeeOps.getAllEmployees();
-        employeeOps.close();
-        ArrayAdapter<Employee> adapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_list_item_1, employees);
+        setContentView(R.layout.activity_view_all_companies);
+        companyOps = new CompanyOperations(this);
+        companyOps.open();
+        companies = companyOps.getAllCompanies();
+        companyOps.close();
+        ArrayAdapter<Company> adapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_list_item_1, companies);
         setListAdapter(adapter);
     }
 }

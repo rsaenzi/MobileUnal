@@ -88,10 +88,10 @@
         android:hint="@string/add_dept"
         />
     <Button
-        android:id="@+id/button_add_update_employee"
+        android:id="@+id/button_add_update_company"
         android:layout_width="@dimen/button_width"
         android:layout_height="@dimen/button_height"
         android:layout_marginTop="@dimen/button_padding"
-        android:text="@string/add_employee"
+        android:text="@string/add_company"
         android:layout_gravity="center"/>
 </LinearLayout>

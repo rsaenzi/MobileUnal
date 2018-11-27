@@ -1,15 +1,16 @@
 package com.example.rsaenz.emsrigobertosaenz.Entity;
 
-public class Employee {
-    private long empId;
+public class Company {
+
+    private long companyId;
     private String firstname;
     private String lastname;
     private String gender;
     private String hiredate;
     private String dept;
 
-    public Employee(long empId, String firstname, String lastname, String gender, String hiredate, String dept){
-        this.empId = empId;
+    public Company(long companyId, String firstname, String lastname, String gender, String hiredate, String dept){
+        this.companyId = companyId;
         this.firstname = firstname;
         this.lastname = lastname;
         this.gender = gender;
@@ -17,16 +18,16 @@ public class Employee {
         this.dept = dept;
     }
 
-    public Employee(){
+    public Company(){
 
     }
 
-    public long getEmpId() {
-        return empId;
+    public long getCompanyId() {
+        return companyId;
     }
 
-    public void setEmpId(long empId) {
-        this.empId = empId;
+    public void setCompanyId(long companyId) {
+        this.companyId = companyId;
     }
 
     public String getFirstname() {
@@ -70,11 +71,9 @@ public class Employee {
     }
 
     public String toString(){
-        return "Emp id: "+getEmpId()+ "\n" +
+        return "Company ID: "+ getCompanyId()+ "\n" +
                 "Name: "+getFirstname() + " " + getLastname() + "\n" +
                 "Hire Date: "+getHiredate() + "\n" +
                 "Department : "+getDept();
-
-
     }
 }

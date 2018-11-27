@@ -16,25 +16,26 @@ import com.example.rsaenz.emsrigobertosaenz.Database.CompanyOperations;
 
 public class MainActivity extends AppCompatActivity{
 
-    private Button addEmployeeButton;
-    private Button editEmployeeButton;
-    private Button deleteEmployeeButton;
-    private Button viewAllEmployeeButton;
-    private CompanyOperations employeeOps;
-    private static final String EXTRA_EMP_ID = "com.androidtutorialpoint.empId";
-    private static final String EXTRA_ADD_UPDATE = "com.androidtutorialpoint.add_update";
+    private Button addCompanyButton;
+    private Button editCompanyButton;
+    private Button deleteCompanyButton;
+    private Button viewAllCompaniesButton;
+    private CompanyOperations companyOps;
+    private static final String EXTRA_EMP_ID = "com.rsaenzi.companyapp.empId";
+    private static final String EXTRA_ADD_UPDATE = "com.rsaenzi.companyapp.add_update";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
 
-        addEmployeeButton = (Button) findViewById(R.id.button_add_employee);
-        editEmployeeButton = (Button) findViewById(R.id.button_edit_employee);
-        deleteEmployeeButton = (Button) findViewById(R.id.button_delete_employee);
-        viewAllEmployeeButton = (Button)findViewById(R.id.button_view_employees);
+        addCompanyButton = (Button) findViewById(R.id.button_add_company);
+        editCompanyButton = (Button) findViewById(R.id.button_edit_company);
+        deleteCompanyButton = (Button) findViewById(R.id.button_delete_company);
+        viewAllCompaniesButton = (Button)findViewById(R.id.button_view_companies);
 
-        addEmployeeButton.setOnClickListener(new View.OnClickListener() {
+        addCompanyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(MainActivity.this,AddUpdateCompany.class);
@@ -42,19 +43,19 @@ public class MainActivity extends AppCompatActivity{
                 startActivity(i);
             }
         });
-        editEmployeeButton.setOnClickListener(new View.OnClickListener() {
+        editCompanyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 getEmpIdAndUpdateEmp();
             }
         });
-        deleteEmployeeButton.setOnClickListener(new View.OnClickListener() {
+        deleteCompanyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 getEmpIdAndRemoveEmp();
             }
         });
-        viewAllEmployeeButton.setOnClickListener(new View.OnClickListener() {
+        viewAllCompaniesButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(MainActivity.this, ViewAllCompanies.class);
@@ -62,13 +63,13 @@ public class MainActivity extends AppCompatActivity{
             }
         });
 
-        employeeOps = new CompanyOperations(MainActivity.this);
+        companyOps = new CompanyOperations(MainActivity.this);
     }
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.employee_menu, menu);
+        getMenuInflater().inflate(R.menu.company_menu, menu);
         return true;
     }
 
@@ -88,6 +89,7 @@ public class MainActivity extends AppCompatActivity{
         View getEmpIdView = li.inflate(R.layout.dialog_get_emp_id, null);
 
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+
         // set dialog_get_emp_id.xml to alertdialog builder
         alertDialogBuilder.setView(getEmpIdView);
 
@@ -129,9 +131,9 @@ public class MainActivity extends AppCompatActivity{
                     public void onClick(DialogInterface dialog,int id) {
                         // get user input and set it to result
                         // edit text
-                        employeeOps = new CompanyOperations(MainActivity.this);
-                        employeeOps.removeEmployee(employeeOps.getEmployee(Long.parseLong(userInput.getText().toString())));
-                        Toast t = Toast.makeText(MainActivity.this,"Employee removed successfully!",Toast.LENGTH_SHORT);
+                        companyOps = new CompanyOperations(MainActivity.this);
+                        companyOps.removeCompany(companyOps.getCompany(Long.parseLong(userInput.getText().toString())));
+                        Toast t = Toast.makeText(MainActivity.this,"Company removed successfully!",Toast.LENGTH_SHORT);
                         t.show();
                     }
                 }).create()
@@ -142,13 +144,13 @@ public class MainActivity extends AppCompatActivity{
     @Override
     protected void onResume() {
         super.onResume();
-        employeeOps.open();
+        companyOps.open();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        employeeOps.close();
+        companyOps.close();
 
     }
 }

@@ -10,7 +10,7 @@
         android:id="@+id/text_view_emp_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/enter_employee_id"
+        android:text="@string/enter_company_id"
         android:layout_gravity="center"
         android:textSize="@dimen/text_size"
         android:textStyle="bold" />

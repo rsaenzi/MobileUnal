@@ -12,14 +12,15 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 import com.example.rsaenz.emsrigobertosaenz.Database.CompanyOperations;
-import com.example.rsaenz.emsrigobertosaenz.Entity.Employee;
+import com.example.rsaenz.emsrigobertosaenz.Entity.Company;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class AddUpdateCompany extends AppCompatActivity implements DatePickerFragment.DateDialogListener{
 
-    private static final String EXTRA_EMP_ID = "com.androidtutorialpoint.empId";
-    private static final String EXTRA_ADD_UPDATE = "com.androidtutorialpoint.add_update";
+    private static final String EXTRA_EMP_ID = "com.rsaenzi.companyapp.companyId";
+    private static final String EXTRA_ADD_UPDATE = "com.rsaenzi.companyapp.add_update";
     private static final String DIALOG_DATE = "DialogDate";
     private ImageView calendarImage;
     private RadioGroup radioGroup;
@@ -29,18 +30,18 @@ public class AddUpdateCompany extends AppCompatActivity implements DatePickerFra
     private EditText deptEditText;
     private EditText hireDateEditText;
     private Button addUpdateButton;
-    private Employee newEmployee;
-    private Employee oldEmployee;
+    private Company newCompany;
+    private Company oldCompany;
     private String mode;
     private long empId;
-    private CompanyOperations employeeData;
+    private CompanyOperations companyData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_update_employee);
-        newEmployee = new Employee();
-        oldEmployee = new Employee();
+        setContentView(R.layout.activity_add_update_company);
+        newCompany = new Company();
+        oldCompany = new Company();
         firstNameEditText = (EditText)findViewById(R.id.edit_text_first_name);
         lastNameEditText = (EditText)findViewById(R.id.edit_text_last_name);
         hireDateEditText = (EditText) findViewById(R.id.edit_text_hire_date);
@@ -49,18 +50,18 @@ public class AddUpdateCompany extends AppCompatActivity implements DatePickerFra
         femaleRadioButton = (RadioButton) findViewById(R.id.radio_female);
         calendarImage = (ImageView)findViewById(R.id.image_view_hire_date);
         deptEditText = (EditText)findViewById(R.id.edit_text_dept);
-        addUpdateButton = (Button)findViewById(R.id.button_add_update_employee);
-        employeeData = new CompanyOperations(this);
-        employeeData.open();
+        addUpdateButton = (Button)findViewById(R.id.button_add_update_company);
+        companyData = new CompanyOperations(this);
+        companyData.open();
 
 
         mode = getIntent().getStringExtra(EXTRA_ADD_UPDATE);
         if(mode.equals("Update")){
 
-            addUpdateButton.setText("Update Employee");
+            addUpdateButton.setText("Update Company");
             empId = getIntent().getLongExtra(EXTRA_EMP_ID,0);
 
-            initializeEmployee(empId);
+            initializeCompany(empId);
 
         }
 
@@ -70,14 +71,14 @@ public class AddUpdateCompany extends AppCompatActivity implements DatePickerFra
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 // find which radio button is selected
                 if (checkedId == R.id.radio_male) {
-                    newEmployee.setGender("M");
+                    newCompany.setGender("M");
                     if(mode.equals("Update")){
-                        oldEmployee.setGender("M");
+                        oldCompany.setGender("M");
                     }
                 } else if (checkedId == R.id.radio_female) {
-                    newEmployee.setGender("F");
+                    newCompany.setGender("F");
                     if(mode.equals("Update")){
-                        oldEmployee.setGender("F");
+                        oldCompany.setGender("F");
                     }
 
                 }
@@ -101,22 +102,22 @@ public class AddUpdateCompany extends AppCompatActivity implements DatePickerFra
             public void onClick(View v) {
 
                 if(mode.equals("Add")) {
-                    newEmployee.setFirstname(firstNameEditText.getText().toString());
-                    newEmployee.setLastname(lastNameEditText.getText().toString());
-                    newEmployee.setHiredate(hireDateEditText.getText().toString());
-                    newEmployee.setDept(deptEditText.getText().toString());
-                    employeeData.addEmployee(newEmployee);
-                    Toast t = Toast.makeText(AddUpdateCompany.this, "Employee "+ newEmployee.getFirstname() + "has been added successfully !", Toast.LENGTH_SHORT);
+                    newCompany.setFirstname(firstNameEditText.getText().toString());
+                    newCompany.setLastname(lastNameEditText.getText().toString());
+                    newCompany.setHiredate(hireDateEditText.getText().toString());
+                    newCompany.setDept(deptEditText.getText().toString());
+                    companyData.addCompany(newCompany);
+                    Toast t = Toast.makeText(AddUpdateCompany.this, "Company "+ newCompany.getFirstname() + "has been added successfully !", Toast.LENGTH_SHORT);
                     t.show();
                     Intent i = new Intent(AddUpdateCompany.this,MainActivity.class);
                     startActivity(i);
                 }else {
-                    oldEmployee.setFirstname(firstNameEditText.getText().toString());
-                    oldEmployee.setLastname(lastNameEditText.getText().toString());
-                    oldEmployee.setHiredate(hireDateEditText.getText().toString());
-                    oldEmployee.setDept(deptEditText.getText().toString());
-                    employeeData.updateEmployee(oldEmployee);
-                    Toast t = Toast.makeText(AddUpdateCompany.this, "Employee "+ oldEmployee.getFirstname() + " has been updated successfully !", Toast.LENGTH_SHORT);
+                    oldCompany.setFirstname(firstNameEditText.getText().toString());
+                    oldCompany.setLastname(lastNameEditText.getText().toString());
+                    oldCompany.setHiredate(hireDateEditText.getText().toString());
+                    oldCompany.setDept(deptEditText.getText().toString());
+                    companyData.updateCompany(oldCompany);
+                    Toast t = Toast.makeText(AddUpdateCompany.this, "Company "+ oldCompany.getFirstname() + " has been updated successfully !", Toast.LENGTH_SHORT);
                     t.show();
                     Intent i = new Intent(AddUpdateCompany.this,MainActivity.class);
                     startActivity(i);
@@ -130,13 +131,13 @@ public class AddUpdateCompany extends AppCompatActivity implements DatePickerFra
 
     }
 
-    private void initializeEmployee(long empId) {
-        oldEmployee = employeeData.getEmployee(empId);
-        firstNameEditText.setText(oldEmployee.getFirstname());
-        lastNameEditText.setText(oldEmployee.getLastname());
-        hireDateEditText.setText(oldEmployee.getHiredate());
-        radioGroup.check(oldEmployee.getGender().equals("M") ? R.id.radio_male : R.id.radio_female);
-        deptEditText.setText(oldEmployee.getDept());
+    private void initializeCompany(long companyId) {
+        oldCompany = companyData.getCompany(companyId);
+        firstNameEditText.setText(oldCompany.getFirstname());
+        lastNameEditText.setText(oldCompany.getLastname());
+        hireDateEditText.setText(oldCompany.getHiredate());
+        radioGroup.check(oldCompany.getGender().equals("M") ? R.id.radio_male : R.id.radio_female);
+        deptEditText.setText(oldCompany.getDept());
     }
 
 

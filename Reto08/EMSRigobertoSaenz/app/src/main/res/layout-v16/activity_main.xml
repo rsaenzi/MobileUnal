@@ -20,26 +20,26 @@
         android:textStyle="bold"
         android:gravity="clip_horizontal" />
     <Button
-        android:id="@+id/button_add_employee"
+        android:id="@+id/button_add_company"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/add_employee"/>
+        android:text="@string/add_company"/>
 
     <Button
-        android:id="@+id/button_edit_employee"
+        android:id="@+id/button_edit_company"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/update_employee"/>
+        android:text="@string/update_company"/>
 
     <Button
-        android:id="@+id/button_delete_employee"
+        android:id="@+id/button_delete_company"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/remove_employee"/>
+        android:text="@string/remove_company"/>
 
     <Button
-        android:id="@+id/button_view_employees"
+        android:id="@+id/button_view_companies"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/view_all_employees"/>
+        android:text="@string/view_all_companies"/>
 </LinearLayout>

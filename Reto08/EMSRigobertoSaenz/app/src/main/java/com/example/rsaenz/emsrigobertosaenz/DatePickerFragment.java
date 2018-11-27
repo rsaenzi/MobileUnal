@@ -15,8 +15,7 @@ public class DatePickerFragment extends DialogFragment {
     private DatePicker datePicker;
     private static final int REQUEST_DATE = 1;
 
-    public static final String EXTRA_DATE =
-            "com.androidtutorialpoint.date";
+    public static final String EXTRA_DATE = "com.rsaenzi.companyapp.date";
 
     public interface DateDialogListener {
         void onFinishDialog(Date date);
