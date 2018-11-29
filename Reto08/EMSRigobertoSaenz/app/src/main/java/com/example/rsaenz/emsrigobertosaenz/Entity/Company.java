@@ -3,23 +3,24 @@ package com.example.rsaenz.emsrigobertosaenz.Entity;
 public class Company {
 
     private long companyId;
-    private String firstname;
-    private String lastname;
-    private String gender;
-    private String hiredate;
-    private String dept;
+    private String name;
+    private String website;
+    private String phone;
+    private String email;
+    private String products;
+    private CompanyType type;
 
-    public Company(long companyId, String firstname, String lastname, String gender, String hiredate, String dept){
-        this.companyId = companyId;
-        this.firstname = firstname;
-        this.lastname = lastname;
-        this.gender = gender;
-        this.hiredate = hiredate;
-        this.dept = dept;
+    public Company(long id, String name, String website, String phone, String email, String products, CompanyType type){
+        this.companyId = id;
+        this.name = name;
+        this.website = website;
+        this.phone = phone;
+        this.email = email;
+        this.products = products;
+        this.type = type;
     }
 
     public Company(){
-
     }
 
     public long getCompanyId() {
@@ -30,50 +31,61 @@ public class Company {
         this.companyId = companyId;
     }
 
-    public String getFirstname() {
-        return firstname;
+    public String getName() {
+        return name;
     }
 
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getLastname() {
-        return lastname;
+    public String getWebsite() {
+        return website;
     }
 
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
+    public void setWebsite(String website) {
+        this.website = website;
     }
 
-    public String getGender() {
-        return gender;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setGender(String gender) {
-        this.gender = gender;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
-    public String getHiredate() {
-        return hiredate;
+    public String getEmail() {
+        return email;
     }
 
-    public void setHiredate(String hiredate) {
-        this.hiredate = hiredate;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public String getDept() {
-        return dept;
+    public String getProducts() {
+        return products;
     }
 
-    public void setDept(String dept) {
-        this.dept = dept;
+    public void setProducts(String products) {
+        this.products = products;
+    }
+
+    public CompanyType getType() {
+        return type;
+    }
+
+    public void setType(CompanyType type) {
+        this.type = type;
     }
 
     public String toString(){
-        return "Company ID: "+ getCompanyId()+ "\n" +
-                "Name: "+getFirstname() + " " + getLastname() + "\n" +
-                "Hire Date: "+getHiredate() + "\n" +
-                "Department : "+getDept();
+        return "Company ID: " + getCompanyId() + "\n" +
+                "Name: " + getName() + "\n" +
+                "Website: " + getWebsite() + "\n" +
+                "Phone: " + getPhone() + "\n" +
+                "Email: " + getEmail() + "\n" +
+                "Products: " + getProducts() + "\n" +
+                "Type: " + getType();
     }
 }

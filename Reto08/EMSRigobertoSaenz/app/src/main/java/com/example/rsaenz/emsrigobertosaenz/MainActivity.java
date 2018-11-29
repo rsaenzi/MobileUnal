@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity{
     private Button deleteCompanyButton;
     private Button viewAllCompaniesButton;
     private CompanyOperations companyOps;
-    private static final String EXTRA_EMP_ID = "com.rsaenzi.companyapp.empId";
+    private static final String EXTRA_COMPANY_ID = "com.rsaenzi.companyapp.companyId";
     private static final String EXTRA_ADD_UPDATE = "com.rsaenzi.companyapp.add_update";
 
     @Override
@@ -43,18 +43,21 @@ public class MainActivity extends AppCompatActivity{
                 startActivity(i);
             }
         });
+
         editCompanyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getEmpIdAndUpdateEmp();
+                editCompany();
             }
         });
+
         deleteCompanyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getEmpIdAndRemoveEmp();
+                deleteCompany();
             }
         });
+
         viewAllCompaniesButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -66,24 +69,7 @@ public class MainActivity extends AppCompatActivity{
         companyOps = new CompanyOperations(MainActivity.this);
     }
 
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.company_menu, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if (id == R.id.menu_item_settings) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-
-    public void getEmpIdAndUpdateEmp(){
+    public void editCompany(){
 
         LayoutInflater li = LayoutInflater.from(this);
         View getEmpIdView = li.inflate(R.layout.dialog_get_emp_id, null);
@@ -100,11 +86,16 @@ public class MainActivity extends AppCompatActivity{
                 .setCancelable(false)
                 .setPositiveButton("OK",new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog,int id) {
+
+                        if (userInput.getText().toString().length() == 0) {
+                            return;
+                        }
+
                         // get user input and set it to result
                         // edit text
                         Intent i = new Intent(MainActivity.this,AddUpdateCompany.class);
                         i.putExtra(EXTRA_ADD_UPDATE, "Update");
-                        i.putExtra(EXTRA_EMP_ID, Long.parseLong(userInput.getText().toString()));
+                        i.putExtra(EXTRA_COMPANY_ID, Long.parseLong(userInput.getText().toString()));
                         startActivity(i);
                     }
                 }).create()
@@ -113,12 +104,13 @@ public class MainActivity extends AppCompatActivity{
     }
 
 
-    public void getEmpIdAndRemoveEmp(){
+    public void deleteCompany(){
 
         LayoutInflater li = LayoutInflater.from(this);
         View getEmpIdView = li.inflate(R.layout.dialog_get_emp_id, null);
 
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+
         // set dialog_get_emp_id.xml to alertdialog builder
         alertDialogBuilder.setView(getEmpIdView);
 
@@ -129,6 +121,11 @@ public class MainActivity extends AppCompatActivity{
                 .setCancelable(false)
                 .setPositiveButton("OK",new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog,int id) {
+
+                        if (userInput.getText().toString().length() == 0) {
+                            return;
+                        }
+
                         // get user input and set it to result
                         // edit text
                         companyOps = new CompanyOperations(MainActivity.this);

@@ -17,10 +17,12 @@ public class ViewAllCompanies extends ListActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_all_companies);
+
         companyOps = new CompanyOperations(this);
         companyOps.open();
         companies = companyOps.getAllCompanies();
         companyOps.close();
+
         ArrayAdapter<Company> adapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_list_item_1, companies);
         setListAdapter(adapter);

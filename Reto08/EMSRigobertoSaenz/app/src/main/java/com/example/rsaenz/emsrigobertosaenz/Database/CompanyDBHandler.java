@@ -10,21 +10,24 @@ public class CompanyDBHandler extends SQLiteOpenHelper{
     private static final int DATABASE_VERSION = 1;
 
     public static final String TABLE_COMPANIES = "companies";
-    public static final String COLUMN_ID = "empId";
-    public static final String COLUMN_FIRST_NAME = "firstname";
-    public static final String COLUMN_LAST_NAME = "lastname";
-    public static final String COLUMN_GENDER = "gender";
-    public static final String COLUMN_HIRE_DATE= "hiredata";
-    public static final String COLUMN_DEPT= "dept";
+
+    public static final String COLUMN_ID = "companyId";
+    public static final String COLUMN_NAME = "name";
+    public static final String COLUMN_WEBSITE = "website";
+    public static final String COLUMN_PHONE = "phone";
+    public static final String COLUMN_EMAIL = "email";
+    public static final String COLUMN_PRODUCTS = "products";
+    public static final String COLUMN_TYPE = "type";
 
     private static final String TABLE_CREATE =
             "CREATE TABLE " + TABLE_COMPANIES + " (" +
                     COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                    COLUMN_FIRST_NAME + " TEXT, " +
-                    COLUMN_LAST_NAME + " TEXT, " +
-                    COLUMN_GENDER + " TEXT, " +
-                    COLUMN_HIRE_DATE + " NUMERIC, " +
-                    COLUMN_DEPT + " TEXT " +
+                    COLUMN_NAME + " TEXT, " +
+                    COLUMN_WEBSITE + " TEXT, " +
+                    COLUMN_PHONE + " TEXT, " +
+                    COLUMN_EMAIL + " NUMERIC, " +
+                    COLUMN_PRODUCTS + " TEXT, " +
+                    COLUMN_TYPE + " TEXT " +
                     ")";
 
     public CompanyDBHandler(Context context){
