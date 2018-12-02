@@ -1,4 +1,4 @@
-package com.example.currentplacedetailsonmap;
+package com.rsaenzi.mapsrigobertosaenz;
 
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
+import com.example.currentplacedetailsonmap.R;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.places.GeoDataClient;
@@ -132,6 +133,9 @@ public class MapsActivityCurrentPlace extends AppCompatActivity
      */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+
+        Log.i(TAG, "Click on Item");
+
         if (item.getItemId() == R.id.option_get_place) {
             showCurrentPlace();
         }
