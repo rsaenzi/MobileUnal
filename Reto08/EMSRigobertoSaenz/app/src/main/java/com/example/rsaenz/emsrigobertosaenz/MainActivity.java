@@ -1,5 +1,6 @@
 package com.example.rsaenz.emsrigobertosaenz;
 
+import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.content.DialogInterface;
@@ -116,6 +117,8 @@ public class MainActivity extends AppCompatActivity{
 
         final EditText userInput = (EditText) getEmpIdView.findViewById(R.id.editTextDialogUserInput);
 
+        final Context thisScreen = this;
+
         // set dialog message
         alertDialogBuilder
                 .setCancelable(false)
@@ -126,16 +129,43 @@ public class MainActivity extends AppCompatActivity{
                             return;
                         }
 
-                        // get user input and set it to result
-                        // edit text
-                        companyOps = new CompanyOperations(MainActivity.this);
-                        companyOps.removeCompany(companyOps.getCompany(Long.parseLong(userInput.getText().toString())));
-                        Toast t = Toast.makeText(MainActivity.this,"Company removed successfully!",Toast.LENGTH_SHORT);
-                        t.show();
+                        new AlertDialog.Builder(thisScreen)
+                                .setTitle("Confirmation")
+                                .setMessage("Do you really want to delete the Company?")
+                                .setIcon(android.R.drawable.ic_dialog_alert)
+                                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+
+                                    public void onClick(DialogInterface dialog, int whichButton) {
+                                        realDelete(userInput.getText().toString());
+                                    }})
+
+                                .setNegativeButton(android.R.string.no, null).show();
                     }
                 }).create()
                 .show();
+    }
 
+    private void realDelete(String companyId) {
+
+        int result = 0;
+
+        try {
+
+            companyOps.open();
+            result = companyOps.removeCompany(companyOps.getCompany(Long.parseLong(companyId)));
+
+            if(result != 0) {
+                Toast.makeText(MainActivity.this,"Company removed successfully!", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(MainActivity.this,"That company id does not exist, please try again", Toast.LENGTH_SHORT).show();
+            }
+
+        } catch(Exception e) {
+            Toast.makeText(MainActivity.this,"That company id does not exist, please try again", Toast.LENGTH_SHORT).show();
+
+        } finally {
+            companyOps.close();
+        }
     }
 
     @Override

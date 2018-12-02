@@ -66,7 +66,7 @@ public class ViewAllCompanies extends ListActivity{
     }
 
     private void loadList(CompanyType type) {
-        
+
         companyOps.open();
         companies = companyOps.getAllCompanies(type);
         companyOps.close();

@@ -113,8 +113,8 @@ public class CompanyOperations {
     }
 
     // Deleting Company
-    public void removeCompany(Company company) {
+    public int removeCompany(Company company) {
 
-        database.delete(CompanyDBHandler.TABLE_COMPANIES, CompanyDBHandler.COLUMN_ID + "=" + company.getCompanyId(), null);
+        return database.delete(CompanyDBHandler.TABLE_COMPANIES, CompanyDBHandler.COLUMN_ID + "=" + company.getCompanyId(), null);
     }
 }
