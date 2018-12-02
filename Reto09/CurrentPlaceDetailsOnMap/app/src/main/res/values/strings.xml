@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Maps Rigoberto Saenz</string>
-    <string name="title_activity_maps">My Places</string>
+    <string name="title_activity_maps">My Places - Rigoberto Saenz</string>
     <string name="default_info_title">Default Location</string>
     <string name="default_info_snippet">No places found, because location permission is disabled.</string>
     <string name="option_get_place">Explore</string>

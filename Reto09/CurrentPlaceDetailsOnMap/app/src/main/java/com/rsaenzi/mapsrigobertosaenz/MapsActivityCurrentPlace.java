@@ -294,6 +294,9 @@ public class MapsActivityCurrentPlace extends AppCompatActivity
                         .icon(BitmapDescriptorFactory.fromResource(R.drawable.map_icon))
                         .snippet(markerSnippet))
                         .showInfoWindow();
+
+                // Set the map's camera position to the current location of the device.
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(place.getLatLng(), DEFAULT_ZOOM));
             }
         }
     }
