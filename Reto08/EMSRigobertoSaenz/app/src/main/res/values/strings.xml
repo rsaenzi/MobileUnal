@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Company Management System</string>
+    <string name="app_name">Companies - Rigoberto Saenz</string>
     <string name="date_picker_title">Hire Date</string>
     <string name="new_company">New Company</string>
     <string name="show_subtitle">Show Subtitle</string>
@@ -20,6 +20,10 @@
     <string name="add_company_type_consultoria">Consultoria</string>
     <string name="add_company_type_desarrollo">Desarrollo a la Medida</string>
     <string name="add_company_type_fabrica">Fabrica de Software</string>
+    <string name="short_company_type_all">All Types</string>
+    <string name="short_company_type_consultoria">Consultoria</string>
+    <string name="short_company_type_desarrollo">Desarrollo</string>
+    <string name="short_company_type_fabrica">Fabrica</string>
     <string name="string_male">Male</string>
     <string name="string_female">Female</string>
     <string name="add_date">Hire Date (DD/MM/YYYY)</string>

@@ -68,9 +68,15 @@ public class CompanyOperations {
         return e;
     }
 
-    public List<Company> getAllCompanies() {
+    public List<Company> getAllCompanies(CompanyType typeFilter) {
 
-        Cursor cursor = database.query(CompanyDBHandler.TABLE_COMPANIES,allColumns,null,null,null, null, null);
+        String selectionFilter = null;
+
+        if(typeFilter != null) {
+            selectionFilter = CompanyDBHandler.COLUMN_TYPE+"=\"" + CompanyType.getFromType(typeFilter) + "\"";
+        }
+
+        Cursor cursor = database.query(CompanyDBHandler.TABLE_COMPANIES, allColumns, selectionFilter,null,null, null, null);
 
         List<Company> companies = new ArrayList<>();
         if(cursor.getCount() > 0){
