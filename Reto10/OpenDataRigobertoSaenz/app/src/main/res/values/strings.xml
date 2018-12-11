@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Open Data Rigoberto Saenz</string>
+    <string name="title_main">Compilado Convocatorias Vigentes y en estado de Condonación de Talento TI - Beneficiarios</string>
+    <string name="description_main">Este conjunto de datos presenta datos estadísticos de los beneficiarios de las convocatorias vigentes y en estado de condonacion de Talento TI (Dirección de Desarrollo de La Industria TI)</string>
 </resources>
