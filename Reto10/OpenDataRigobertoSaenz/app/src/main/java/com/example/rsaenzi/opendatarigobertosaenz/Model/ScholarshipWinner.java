@@ -138,4 +138,14 @@ public class ScholarshipWinner {
         this.valorACondonar = valorACondonar;
     }
 
+    public String toString(){
+        return "\n" +
+                "Ciudad: " + getCiudadIes() + "\n" +
+                "Convenio: " + getConvenio() + "\n" +
+                "Convocatoria: " + getConvocatoria() + "\n" +
+                "Estado: " + getEstadoDeLaCondonaciN() + "\n" +
+                "Genero: " + getGenero() + "\n" +
+                "Nivel: " + getTipoDeEducaciN() + "\n" +
+                "Valor: " + getValorACondonar() + "\n";
+    }
 }

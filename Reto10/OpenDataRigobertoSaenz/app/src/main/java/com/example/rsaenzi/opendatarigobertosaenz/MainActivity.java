@@ -5,6 +5,7 @@ import android.app.ListActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ArrayAdapter;
+import android.widget.ListAdapter;
 
 import com.example.rsaenzi.opendatarigobertosaenz.Model.ScholarshipWinner;
 import com.google.gson.Gson;
@@ -32,7 +33,7 @@ public class MainActivity extends ListActivity {
 
         List<ScholarshipWinner> emptyList = new ArrayList<ScholarshipWinner>();
 
-        adapter = new ArrayAdapter<>(this, android.R.layout.simple_expandable_list_item_1, emptyList);
+        adapter = new ArrayAdapter<ScholarshipWinner>(this, android.R.layout.simple_list_item_1, emptyList);
         setListAdapter(adapter);
     }
 
@@ -50,37 +51,27 @@ public class MainActivity extends ListActivity {
                 .build();
 
         MyApiEndpointInterfaces apiService = retrofit.create(MyApiEndpointInterfaces.class);
-
         Call<List<ScholarshipWinner>> call = apiService.getAllScholarshipWinners();
 
         call.enqueue(new Callback<List<ScholarshipWinner>>() {
 
             @Override
             public void onResponse(Call<List<ScholarshipWinner>> call, Response<List<ScholarshipWinner>> response) {
-                int statusCode = response.code();
-                Log.i("Open Data", "Status Code: " + statusCode);
 
+                int statusCode = response.code();
                 List<ScholarshipWinner> myList = response.body();
-                Log.i("Open Data", "Response: " + myList);
+
+                adapter.clear();
+                adapter.addAll(myList);
+                adapter.notifyDataSetChanged();
             }
 
             @Override
             public void onFailure(Call<List<ScholarshipWinner>> call, Throwable t) {
-                Log.e("Open Data", "Error");
+                adapter.clear();
+                adapter.notifyDataSetChanged();
             }
 
         });
-
-        /*
-        try {
-
-            Response<List<ScholarshipWinner>> response = call.execute();
-
-        } catch (IOException e ){
-            // handle error
-        }
-        */
-
     }
 }
-
